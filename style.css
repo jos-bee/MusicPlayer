@@ -1,0 +1,419 @@
+:root {
+  --red-color: #b00202;
+  --blue-color: cyan;
+  --light-color: #d4d4d4;
+  --main-dark: #111;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #333333;
+  color: var(--main-dark);
+  transition: all 0.5s ease-in-out;
+}
+
+body.light {
+  color: rgb(139, 139, 139);
+  background: var(--light-color);
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 500px;
+}
+
+.container {
+  position: relative;
+  width: 500px;
+  height: auto;
+  background: #2c2c2c;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), 0 -3px 7px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+body.light .container {
+  background: var(--light-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), 0 -3px 5px rgba(0, 0, 0, 0.1);
+}
+
+header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 2rem;
+  line-height: 2rem;
+  padding: 1rem;
+}
+
+header .pin1,
+header .pin2,
+header .pin3 {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(0deg, #242424, #333333);
+  box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.3), 1px 2px 3px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+header .pin2,
+header .pin1,
+header .pin3 {
+  display: flex;
+  justify-content: center;
+}
+
+header .pin3 i.fa-sun {
+  font-size: 1.2rem;
+}
+
+header .pin3 i.fa-moon {
+  font-size: 1rem;
+}
+
+body.light .pin1,
+body.light .pin2,
+body.light .pin3 {
+  background: linear-gradient(0deg, rgb(189, 187, 187), rgb(224, 224, 224));
+  box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1), 0 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+#files {
+  display: none;
+}
+
+.btn {
+  background: transparent;
+  border: none;
+  color: var(--blue-color);
+  display: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.btn.active,
+.btn.list,
+#modeBtn {
+  display: block;
+}
+
+body.light .btn {
+  color: var(--red-color);
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 2rem;
+}
+
+.vz-wrapper.-canvas {
+  position: relative;
+  height: initial;
+  width: initial;
+  background: transparent;
+  box-shadow: none;
+}
+
+canvas {
+  position: relative;
+  top: 55%;
+  transform: translateY(-50%);
+}
+
+main .player {
+  position: relative;
+  width: 176px;
+  height: 176px;
+  margin-left: auto;
+  background: linear-gradient(0deg, #333, #222);
+  border-radius: 50%;
+  border: 2px solid var(--main-dark);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2),
+    0 4px 2px rgba(0, 0, 0, 0.2);
+}
+
+body.light .player {
+  border: 2px solid rgb(209, 208, 208);
+  background: linear-gradient(0deg, rgb(224, 224, 224), rgb(189, 187, 187));
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1), 2px 2px 3px rgba(0, 0, 0, 0.2),
+    -2px 2px 3px rgba(0, 0, 0, 0.1), 0 -2px 1px rgba(255, 255, 255, 0.5);
+}
+
+main .player .fa,
+main .player .fas {
+  position: absolute;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+main .player .fa:hover,
+main .player .fas:hover,
+.player #play.active,
+#repeat.active,
+#random.active {
+  color: var(--blue-color);
+  text-shadow: 0 0 4px var(--blue-color);
+}
+
+body.light .player .fa:hover,
+body.light .player .fas:hover,
+body.light .player #play.active,
+body.light #repeat.active,
+body.light #random.active {
+  color: var(--red-color);
+  text-shadow: none;
+}
+
+main .player .fa-play,
+#play.active {
+  width: 88px;
+  height: 88px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid var(--main-dark);
+  border-radius: 50%;
+  text-align: center;
+  line-height: 88px;
+  background: linear-gradient(0deg, #222, #333);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2),
+    0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+main .player .fa-play.ready {
+  border: 2px solid rgba(0, 255, 255, 0.1);
+  color: rgba(0, 255, 255, 0.1);
+  animation: pulse 0.8s ease-in-out infinite alternate;
+}
+
+#play.active {
+  border: 2px solid rgba(0, 255, 255, 0.9);
+}
+
+body.light .player .fa-play,
+body.light #play.active {
+  border: 2px solid rgb(172, 172, 172);
+  background: linear-gradient(0deg, rgb(189, 187, 187), #e0e0e0);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.4),
+    0 0 3px rgba(56, 56, 56, 0.3);
+}
+
+body.light .player .fa-play.ready {
+  /* border: 2px solid rgba(176, 2, 2, 0.5); */
+  color: rgba(176, 2, 2, 0.3);
+  animation: lightPulse 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  to {
+    color: var(--blue-color);
+    border-color: rgba(0, 255, 255, 0.6);
+  }
+}
+
+@keyframes lightPulse {
+  to {
+    color: var(--red-color);
+    border-color: rgba(176, 2, 2, 0.6);
+  }
+}
+
+main .player .fa-redo-alt {
+  top: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+main .player .fa-fast-backward {
+  top: 50%;
+  left: 8%;
+  transform: translateY(-50%);
+}
+
+main .player .fa-fast-forward {
+  top: 50%;
+  right: 8%;
+  transform: translateY(-50%);
+}
+
+main .player .fa-random {
+  top: 82%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+footer {
+  padding: 2rem 2rem;
+  color: #999;
+  text-shadow: 2px 2px var(--main-dark);
+  font-family: "Roboto", sans-serif;
+}
+
+body.light footer {
+  color: var(--red-color);
+  text-shadow: none;
+}
+
+footer .title {
+  text-align: center;
+  padding-bottom: 0.5rem;
+}
+
+footer .time-tracker {
+  display: flex;
+  border-top: 1px solid #000;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  padding-top: 0.5rem;
+}
+
+body.light .time-tracker {
+  border-top: 1px solid rgb(146, 146, 146);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+footer .time-tracker .timer {
+  position: relative;
+  width: 90%;
+  height: 2rem;
+  cursor: pointer;
+}
+
+footer .time-tracker .timer .bg {
+  position: relative;
+  height: 0.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-right: 0.5rem;
+  border-top: 1px solid #000;
+  border-radius: 10px;
+  background: none;
+  box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+}
+
+body.light .time-tracker .timer .bg {
+  border-top: 1px solid rgb(110, 110, 110);
+  box-shadow: inset 0 -1px 1px rgba(252, 252, 252, 0.8),
+    inset 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+footer .time-tracker .timer .bg #runner {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 0.2rem;
+  border-radius: 10px;
+  width: 0%;
+  background: var(--blue-color);
+  box-shadow: 0 0 2px 2px var(--blue-color);
+}
+
+body.light footer .time-tracker .timer .bg #runner {
+  height: 0.6rem;
+  background: var(--red-color);
+  box-shadow: none;
+}
+
+footer .time-tracker .time {
+  line-height: 2rem;
+}
+
+ul {
+  position: relative;
+  top: -10px;
+  padding: 10px 0;
+  width: 98%;
+  height: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), 0 -3px 7px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  overflow: auto;
+  background: rgb(41, 41, 41);
+  transition: all 0.5s ease-in-out;
+}
+
+ul::-webkit-scrollbar {
+  display: none;
+}
+
+body.light ul {
+  background: rgb(212, 212, 212);
+}
+
+ul.active {
+  height: 200px;
+}
+
+ul li {
+  position: relative;
+  display: none;
+  align-items: center;
+  padding: 10px 10px;
+  list-style: none;
+  color: var(--blue-color);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+body.light ul li {
+  color: var(--red-color);
+}
+
+ul li:hover {
+  background: #222;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), 0 -3px 7px rgba(0, 0, 0, 0.2);
+}
+
+body.light ul li:hover {
+  background: var(--red-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), 0 -3px 7px rgba(0, 0, 0, 0.2);
+  color: rgb(196, 196, 196);
+}
+
+ul.active li {
+  display: flex;
+}
+
+.album-image {
+  position: relative;
+  width: 100px;
+  height: 60px;
+}
+
+img {
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.info {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 15px;
+}
+
+ul li i {
+  visibility: hidden;
+}
+
+ul li i.active {
+  visibility: visible;
+}

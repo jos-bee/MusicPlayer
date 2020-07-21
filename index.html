@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
+    />
+    <title>Music player</title>
+  </head>
+  <body class>
+    <!--MAin container-->
+    <div class="main-container">
+      <!--Player container-->
+      <div class="container" id="musicContainer">
+        <!--Header in player-->
+        <header>
+          <!--Playlist button-->
+          <div class="pin1">
+            <button class="btn list" id="listBtn">
+              <i class="fas fa-list-ul"></i>
+            </button>
+          </div>
+
+          <div class="pin3">
+            <button class="btn" id="modeBtn">
+              <i class="fas fa-moon"></i>
+            </button>
+          </div>
+
+          <!--Add/Remove button-->
+          <div class="pin2">
+            <input
+              type="file"
+              name="files"
+              id="files"
+              multiple
+              accept="audio/*"
+            />
+            <button class="btn add active" id="addBtn">
+              <i class="fas fa-plus"></i>
+            </button>
+            <button class="btn remove " id="removeBtn">
+              <i class="fas fa-minus"></i>
+            </button>
+          </div>
+        </header>
+
+        <audio src="" id="audio"></audio>
+
+        <!--Container for buttons and sound visualization-->
+        <main>
+          <!--Visualization bar-->
+          <div class="vz-wrapper -canvas">
+            <canvas id="myCanvas" width="250" height="150"></canvas>
+          </div>
+
+          <!--Buttons-->
+          <div class="player">
+            <i class="fas fa-redo-alt" id="repeat"></i>
+            <i class="fa fa-fast-backward" id="prev"></i>
+            <i class="fa fa-play" id="play"></i>
+            <i class="fa fa-fast-forward" id="next"></i>
+            <i class="fa fa-random" id="random"></i>
+          </div>
+        </main>
+
+        <!--Container for progress bar-->
+        <footer>
+          <div class="title" id="title"></div>
+          <div class="time-tracker">
+            <div class="timer">
+              <div class="bg" id="progress">
+                <div id="runner"></div>
+              </div>
+            </div>
+            <div class="time">00:00</div>
+          </div>
+        </footer>
+      </div>
+
+      <!--Playlis container-->
+      <ul id="playList"></ul>
+    </div>
+
+    <script src="library/id3-minimized.js"></script>
+    <script src="library/myVisualizer.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
